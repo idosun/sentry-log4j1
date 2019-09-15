@@ -104,7 +104,7 @@ public class Application {
         String someLocalVariable = "stack locals";
         
         try {
-            int example = 1 / 0;
+            int example = 2 / 0;
         } catch (Exception e) {
             // caught exception that will be sent to Sentry
             logger.error("Caught exception!", e);
