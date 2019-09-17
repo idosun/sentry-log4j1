@@ -40,6 +40,7 @@ public class Application {
             int currentInventory = tempInventory.get(item.getId());
             if (currentInventory <= 0) {
 //                throw new RuntimeException("No inventory for " + item.getId());
+            	
             	return;
             }
 
