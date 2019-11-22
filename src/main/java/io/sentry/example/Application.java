@@ -139,7 +139,7 @@ public class Application {
     	initSentry();
         inventory.put("wrench", 0);
         inventory.put("nails", 0);
-        inventory.put("hammer", 4);
+        inventory.put("hammer", 2);
         SpringApplication.run(Application.class, args);
     }
     
