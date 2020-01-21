@@ -54,6 +54,7 @@ public class Application {
                                        @RequestBody Order order) {
         try {
             // set session and transaction id as tags
+        	ThreadContext.put("page", "checkout");
             ThreadContext.put("session_id", sessionId);
             ThreadContext.put("transaction_id", transactionId);
 
@@ -87,6 +88,8 @@ public class Application {
     @RequestMapping("/capture-message")
     @ResponseBody
     String captureMessage() {
+    	
+    	ThreadContext.put("page", "capture-message");
         
     	// MDC extras (added to Sentry event as ADDITIONAL DATA) 
         ThreadContext.put("extra_key", "extra_value");
@@ -103,6 +106,9 @@ public class Application {
     @RequestMapping("/handled")
     @ResponseBody
     String handledError() {
+    	
+    	ThreadContext.put("page", "handled");
+    	
         String someLocalVariable = "stack locals";
         
         try {
@@ -117,7 +123,7 @@ public class Application {
     @RequestMapping("/filtered")
     @ResponseBody
     String handledFilteredError() {
-
+    	ThreadContext.put("page", "filtered");
         try {
             int example = 1 / 0;
         } catch (Exception e) {
@@ -130,6 +136,7 @@ public class Application {
     @RequestMapping("/unhandled")
     @ResponseBody
     String unhandledError() {
+    	ThreadContext.put("page", "unhandled");
     	 String someLocalVariable = "stack locals";
     	 
         throw new RuntimeException("Unhandled exception!");
