@@ -39,7 +39,7 @@ public class Application {
         for (Item item : cart) {
             int currentInventory = tempInventory.get(item.getId());
             if (currentInventory <= 0) {
-                throw new RuntimeException("No inventory for " + item.getId());
+               //throw new RuntimeException("No inventory for " + item.getId());
             }
 
             tempInventory.put(item.getId(), currentInventory-1);
@@ -62,9 +62,14 @@ public class Application {
             logger.info("Processing order for: " + userEmail);
             
             // Set the user in the current context.
-            Sentry.getContext().setUser(
-                new UserBuilder().setEmail(userEmail).build()
-            );
+            UserBuilder userBuilder = new UserBuilder();
+            userBuilder.setIpAddress("<IP address from request headers>");
+            userBuilder.setUsername("userName");
+            userBuilder.setId("userId");
+            userBuilder.setEmail(userEmail);
+            Sentry.getContext().setUser( userBuilder.build());
+            
+            Sentry.getContext().addTag("organization_id", );
             
             Sentry.getContext().recordBreadcrumb(
                 new BreadcrumbBuilder().setMessage("Processing checkout for user: " + userEmail).setType(Type.USER).setLevel(Level.CRITICAL).setCategory("custom").build()
