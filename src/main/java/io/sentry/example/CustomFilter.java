@@ -1,6 +1,7 @@
 package io.sentry.example;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import org.slf4j.MDC;
 import org.springframework.stereotype.Component;
@@ -14,6 +15,19 @@ import javax.servlet.ServletResponse;
 
 @Component
 public class CustomFilter implements Filter {
+	
+	private static ArrayList<String> customTypes= new ArrayList<String>();
+    static{
+        customTypes.add("trial");
+        customTypes.add("team");
+        customTypes.add("business");
+        customTypes.add("enterprise");
+    }
+
+    private String getCustomerType(){
+        int r = (int) (Math.random() * (3));
+        return customTypes.get(r);
+    }
 
 
 	@Override
@@ -26,8 +40,7 @@ public class CustomFilter implements Filter {
 			throws IOException, ServletException {
         
 		//Defined in sentry.properties - will be added as Tags
-		MDC.put("customKey1", "value1");
-        MDC.put("customKey2", "value2");
+        MDC.put("customer_type", this.getCustomerType());
         
         //Not defined in sentry.properties - will be added to ADDITIONAL DATA 
         MDC.put("customKey3", "value3");
