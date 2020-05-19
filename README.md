@@ -1,4 +1,4 @@
-# Sentry Log4J2 + Java Agent Demo
+# Sentry Log4J1 + Java Agent Demo
 
 This project contains an example Sentry integration with a Spring Boot application.
 It uses the default `log4j` logging framework to send log level `WARN` and above to sentry via the `log4j` Sentry integration/SDK, and the agent will enhance your application stack traces on Sentry by adding the names and values of local variables to each frame.
